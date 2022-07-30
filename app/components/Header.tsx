@@ -9,8 +9,11 @@ export interface HeaderProps extends HeaderBaseProps {
 export const Header = () => {
 
   const theme = useTheme();
+
+
   return (
     <HeaderContainer
+      fontFamily="Roboto"
       backgroundColor="rgba(0, 0, 0, 0.8)"
       boxShadow="0px 1px 3px rgba(0, 0, 0, 0.5)"
       height={theme.headerHeight}

@@ -20,6 +20,10 @@ const Styles = createGlobalStyle`
     margin: 0;
     padding: 0;
   }
+
+  * {
+    font-family: Ubunutu;
+  }
 `;
 
 export const meta: MetaFunction = () => ({

@@ -23,7 +23,7 @@ import {
 } from 'styled-system';
 
 export const Container = styled.div`
-  width: 100%;
+  width: 200px;
   display: flex;
   flex-direction: row;
   justify-content: center;

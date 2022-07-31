@@ -1,9 +1,17 @@
+import { useCallback } from 'react';
 import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
 import { View } from '@kilo-lab/web-design.compositions';
 import styled, { useTheme } from 'styled-components';
-import { TitleGraphic, CardLink } from '../components';
-import { fontSize } from 'styled-system';
+import { fontSize, FontSizeProps } from 'styled-system';
+import { useNavigate } from '@remix-run/react';
+import {
+  TitleSection,
+  WhatWeDo,
+  TitleGraphic,
+  Page,
+} from '../components';
+import { useIsMobile } from '../hooks';
 
 const List = styled.ul<FontSizeProps>`
   color: white;
@@ -25,9 +33,19 @@ const Item = styled(LI)<FontSizeProps>(
 export default function Index() {
 
   const theme = useTheme();
+
+  const navigate = useNavigate();
+
+  const mobile = useIsMobile();
+
+  const onContact = useCallback(() => {
+    navigate('/contact');
+  }, [navigate]);
+
   return (
-    <View>
-      <Text>henlo</Text>
+    <View minHeight={`calc(100vh - ${theme.headerHeight}px - ${theme.footerHeight}px)`} width="100%">
+      <TitleSection />
+      <WhatWeDo />
     </View>
   );
 }

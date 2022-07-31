@@ -5,15 +5,16 @@ import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
 import { Button } from '@kilo-lab/web-design.button';
 import { useTheme } from 'styled-components';
-import { useWidth } from '~/hooks';
+import { useWidth, useIsMobile } from '~/hooks';
 import { motion } from 'framer-motion';
 
-export interface TitleSectionProps extends Partial<ViewProps> {}
+export interface TitleSectionProps extends Partial<ViewProps> { }
 
 export const TitleSection: React.FC<TitleSectionProps> = props => {
   const theme = useTheme();
   const width = useWidth();
   const navigate = useNavigate();
+  const mobile = useIsMobile();
   return (
     <View
       backgroundColor={theme.colors.primary}
@@ -32,19 +33,22 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
         flexDirection="column"
         justifyContent="center"
         alignItems="flex-start"
-        marginLeft="100px"
+        marginLeft={mobile ? "20px" : "100px"}
+        paddingBottom="170px"
+        minWidth={mobile ? undefined : "400px"}
       >
         <Title
           fontFamily="Ubuntu"
-          fontSize="90px" 
+          fontSize={mobile ? "40px" : "90px"}
+          fontWeight="normal"
           textShadow={theme.titleShadow}
           marginBottom={0}
           paddingBottom={0}
-          >
-          The Resuable Software Powerhouse
+        >
+          The Reuseable Software Powerhouse
         </Title>
         <Text
-          fontSize="34px"
+          fontSize={mobile ? "18px" : "34px"}
           textShadow={theme.titleShadow}
           fontFamily="Ubuntu"
           marginBottom="10px"
@@ -56,10 +60,13 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
           color={theme.colors.primary}
           fontWeight="bold"
           fontFamily="Ubuntu"
+          boxShadow="1px 0px 5px rgba(0, 0, 0, 0.5)"
           as={motion.button}
+          whileHover={{ scale: 1.1 }}
           onClick={() => navigate('/#contact')}
-          height="40px"
-          width="200px"
+          minHeight="50px"
+          width="90%"
+          marginTop="40px"
         >
           Kickstart your Idea!
         </Button>
@@ -67,21 +74,22 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
       <View
         flex={1}
         width="100px"
-        display="flex"
+        display={mobile ? "hidden" : "flex"}
         flexDirection="row"
         justifyContent="flex-end"
         alignItems="center"
         position="relative"
+        overflowX="hidden"
       >
-        <img
+        <motion.img
+          initial={{ x: 500 }}
+          animate={{ x: 0, y: 50 }}
+          transition={{ ease: "easeOut", duration: 1 }}
           src="/inform_title.svg"
-          width="800px"
-          height="700px"
+          width="100%"
+          style={{ position: 'absolute', left: 300 }}
         />
       </View>
-      <img src="/Vector.svg" width="100%"
-        style={{position: 'absolute', bottom: "-100px", left: 0, zIndex: 10}}
-      />
     </View>
   )
 }

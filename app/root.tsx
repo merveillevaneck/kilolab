@@ -21,7 +21,7 @@ const Styles = createGlobalStyle`
     padding: 0;
   }
 
-  * {
+  div, html, h1, h2, h3, h4, p, span, text, a, header, footer {
     font-family: Ubunutu;
   }
 `;
@@ -47,7 +47,7 @@ export default function App() {
           <Styles />
           <Header />
           <Outlet />
-          <Footer />
+          {/* <Footer /> */}
         </ThemeProvider>
         <ScrollRestoration />
         <Scripts />

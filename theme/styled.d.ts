@@ -4,9 +4,11 @@ declare module 'styled-components' {
   export interface DefaultTheme {
     borderRadius: number;
     headerHeight: number;
+    footerHeight: number;
     headingSize: number;
     titleSize: number;
     bubbleShadow: string;
+    titleShadow: string;
 
     colors: {
       header: string;

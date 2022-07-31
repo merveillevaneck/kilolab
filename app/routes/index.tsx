@@ -8,6 +8,7 @@ import { useNavigate } from '@remix-run/react';
 import {
   TitleSection,
   WhatWeDo,
+  WhatWeOffer,
   TitleGraphic,
   Page,
 } from '../components';
@@ -46,6 +47,7 @@ export default function Index() {
     <View minHeight={`calc(100vh - ${theme.headerHeight}px - ${theme.footerHeight}px)`} width="100%">
       <TitleSection />
       <WhatWeDo />
+      <WhatWeOffer />
     </View>
   );
 }

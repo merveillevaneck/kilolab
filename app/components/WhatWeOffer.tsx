@@ -4,7 +4,7 @@ import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
 import { useTheme } from 'styled-components';
 import { useIsMobile, useWidth } from '~/hooks';
-import { motion, useInView } from 'framer-motion';
+import { motion, useInView, LayoutGroup } from 'framer-motion';
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -18,10 +18,11 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
   const width = useWidth();
   const [current, setCurrent] = useState<number>(1);
   const animate = useCallback(async () => {
+    await sleep(1000);
     setCurrent(2);
     await sleep(1000);
     setCurrent(3);
-  }, []);
+  }, [setCurrent]);
   const ref = useRef<HTMLDivElement>(null)
   const inView = useInView(ref, { once: true });
   useEffect(() => {
@@ -29,6 +30,8 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
       animate();
     }
   }, [inView]);
+
+  
   return (
     <View
       backgroundColor="white"
@@ -58,7 +61,7 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
         ]}
         src="/inform_iphone.svg"
         number={1}
-        _img={{width: '200px'}}
+        _img={{width: '200px', style: { marginLeft: "20px" }}}
         current={current}
       />
       <AboutRow
@@ -73,7 +76,8 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
         src="/busy_bees_macbook.svg"
         reverse
         number={2}
-        _img={{width: '300px'}}
+        current={current}
+        _img={{width: '300px', style: { marginLeft: "20px"}}}
       />
       <AboutRow
         title="Mobile Development"
@@ -85,10 +89,10 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
         ]}
         src="/inform_standing_iphone.svg"
         number={3}
-        _img={{width: '250px'}}
+        current={current}
+        _img={{width: '250px', style: { marginLeft: mobile ? "80px" : undefined }}}
         ref={ref}
       />
-
     </View>
   )
 }
@@ -105,7 +109,7 @@ export interface AboutRowProps extends Partial<ViewProps> {
   ref?: any;
 }
 
-export const AboutRow: React.FC<AboutRowProps> = props => {
+export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) => {
 
   const {
     children,
@@ -123,19 +127,22 @@ export const AboutRow: React.FC<AboutRowProps> = props => {
   const theme = useTheme();
   const mobile = useIsMobile();
 
+  // if (current === number) console.log('current', current);
+  console.log('number', number, 'current', current);
+
   return (
       <View
         as={motion.div}
-        onEnter={handleAnimation}
         display="flex"
         flexDirection={mobile ? "column" : reverse ? "row-reverse" : "row"}
-        justifyContent="center"
+        justifyContent="space-between"
         alignItems="center"
         width="100%"
-        maxWidth="1200px"
+        maxWidth="800px"
         marginX="30px"
         position="relative"
         marginBottom="50px"
+        ref={ref}
         {...rest}
       >
         <View
@@ -157,7 +164,7 @@ export const AboutRow: React.FC<AboutRowProps> = props => {
             lineHeight="1.5"
           >
             {
-              list.map((item: string) => <li>{item}</li>)
+              list.map((item: string) => <li key={item}>{item}</li>)
             }
           </Text>
         </View>
@@ -166,24 +173,37 @@ export const AboutRow: React.FC<AboutRowProps> = props => {
         </View>
         { current === number && <View
           as={motion.div}
+          layout
           layoutId="bubble"
           display={mobile ? "none" : undefined}
           position="absolute"
-          right={!reverse ? 0 : undefined}
-          left={reverse ? 0 : undefined}
-        >
+          right={!reverse ? -200 : undefined}
+          left={reverse ? -200 : undefined}
+          zIndex={100}>
           <View
+            as={motion.div}
+            animate={{rotate: [0, 180, 360], scale: [1, 1.1, 1]}}
+            transition={{ ease: "linear", duration: 5, repeat: Infinity }}
             backgroundColor={theme.colors.primary}
             width="300px"
             height="300px"
-            borderRadius="150px"
+            borderRadius="49%"
+            boxShadow="0 0 3px rgba(0, 0, 0, 0.5)"
             display="flex"
             justifyContent="center"
-            alignItems="center"
-          >
-            <Text color="white" fontSize="32px" fontFamily="Ubuntu" fontWeight="bold">1</Text>
+            alignItems="center">
+            <Text
+              as={motion.p}
+              animate={{rotate: [0, -180, -360], scale: [1, 0.9, 1]}}
+              transition={{ease: "linear", duration: 5, repeat: Infinity}}
+              color="white"
+              fontSize="32px"
+              fontFamily="Ubuntu"
+              fontWeight="bold">
+              {number}
+            </Text>
           </View>
         </View>}
       </View>
   );
-}
+});

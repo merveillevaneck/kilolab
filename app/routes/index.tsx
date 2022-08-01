@@ -9,6 +9,7 @@ import {
   TitleSection,
   WhatWeDo,
   WhatWeOffer,
+  DragMe,
   TitleGraphic,
   Page,
 } from '../components';
@@ -48,6 +49,8 @@ export default function Index() {
       <TitleSection />
       <WhatWeDo />
       <WhatWeOffer />
+      <DragMe />
+      <View height="300px" width="100%"/>
     </View>
   );
 }

@@ -6,3 +6,4 @@ export * from './Page';
 export * from './TitleSection';
 export * from './WhatWeDo';
 export * from './WhatWeOffer';
+export * from './DragMe';

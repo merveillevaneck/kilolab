@@ -2,9 +2,11 @@ import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { View, ViewProps } from '@kilo-lab/web-design.compositions';
 import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
+import { Button } from '@kilo-lab/web-design.button';
 import { useTheme } from 'styled-components';
 import { useIsMobile, useWidth } from '~/hooks';
 import { motion, useInView, LayoutGroup } from 'framer-motion';
+import { useNavigate } from 'react-router';
 
 function sleep(ms: number) {
     return new Promise(resolve => setTimeout(resolve, ms));
@@ -13,6 +15,7 @@ function sleep(ms: number) {
 export interface WhatWeOfferProps extends Partial<ViewProps> {}
 
 export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
+  const navigate = useNavigate();
   const theme = useTheme();
   const mobile = useIsMobile();
   const width = useWidth();
@@ -39,11 +42,13 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
       overflowX="hidden"
       paddingTop="200px"
       paddingX="50px"
+      paddingBottom="100px"
       display="flex"
       flexDirection="column"
       justifyContent="flex-start"
       alignItems="center"
       overflowY="hidden"
+      zIndex={1}
       {...props}
     >
       <img src="/green_wave.svg" width={mobile ? "1000px" : width}
@@ -92,7 +97,33 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
         current={current}
         _img={{width: '250px', style: { marginLeft: mobile ? "80px" : undefined }}}
         ref={ref}
+        marginBottom="10px"
       />
+      <View
+        maxWidth="800px"
+        width="100%"
+        display="flex"
+        alignItems="center"
+        marginBottom="50px"
+      >
+        <Button
+          as={motion.button}
+          opacity={1}
+          whileHover={{ scale: 1.1}}
+          minHeight="40px"
+          width="200px"
+          onClick={() => navigate('#contact')}
+          backgroundColor={theme.colors.primary}
+          color="white"
+          fontWeight="bold"
+        >
+          Get A Quote!
+        </Button>
+      </View>
+
+      {!mobile && <img src="/purple_wave_1.svg" width={mobile ? "1000px" : width}
+        style={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1 }}
+      />}
     </View>
   )
 }
@@ -151,7 +182,7 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
           <Title
             color={theme.colors.primary}
             fontFamily="Ubuntu"
-            fontSize="30px"
+            fontSize={mobile ? "24px" : "30px"}
             fontWeight="normal"
             textShadow={theme.textShadow}
             marginLeft="10px"
@@ -159,9 +190,12 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
             {title}
           </Title>
           <Text
+            as={motion.ul}
             color={theme.colors.text}
             textShadow={theme.textShadow}
             lineHeight="1.5"
+            marginLeft={mobile ? "-20px" : undefined}
+            fontSize={mobile ? "14px" : undefined}
           >
             {
               list.map((item: string) => <li key={item}>{item}</li>)

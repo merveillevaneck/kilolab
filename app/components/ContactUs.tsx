@@ -19,7 +19,7 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
       position="relative"
       height="650px"
       overflowX="hidden"
-      paddingTop="100px"
+      paddingTop="300px"
       display="flex"
       flexDirection="row"
       justifyContent="space-evenly"

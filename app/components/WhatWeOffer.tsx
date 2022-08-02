@@ -7,10 +7,8 @@ import { useTheme } from 'styled-components';
 import { useIsMobile, useWidth } from '~/hooks';
 import { motion, useInView, LayoutGroup } from 'framer-motion';
 import { useNavigate } from 'react-router';
+import { sleep } from '~/util';
 
-function sleep(ms: number) {
-    return new Promise(resolve => setTimeout(resolve, ms));
-}
 
 export interface WhatWeOfferProps extends Partial<ViewProps> {}
 
@@ -190,6 +188,7 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
             {title}
           </Title>
           <Text
+            fontFamily="Ubuntu"
             as={motion.ul}
             color={theme.colors.text}
             textShadow={theme.textShadow}

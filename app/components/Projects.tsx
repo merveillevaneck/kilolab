@@ -1,14 +1,16 @@
-import React, { useState } from 'react'
+import React, { useState, useCallback, useEffect } from 'react'
 import { View, ViewProps } from '@kilo-lab/web-design.compositions';
 import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
 import { Button } from '@kilo-lab/web-design.button';
 import { useTheme } from 'styled-components';
 import { useIsMobile, useWidth } from '~/hooks';
-import { motion } from 'framer-motion';
-import { Carousel } from 'react-responsive-carousel';
+import { AnimatePresence, motion } from 'framer-motion';
+import { sleep } from '~/util';
 
 export interface ProjectsProps extends Partial<ViewProps> { }
+
+const CAROUSEL_INTERVAL = 10000;
 
 export const Projects: React.FC<ProjectsProps> = props => {
   const theme = useTheme();
@@ -16,6 +18,21 @@ export const Projects: React.FC<ProjectsProps> = props => {
   const width = useWidth();
 
   const [index, setIndex] = useState<number>(0);
+
+  const repeat = async () => {
+    setIndex(-1);
+    await sleep(500);
+    setIndex(1);
+    await sleep(CAROUSEL_INTERVAL);
+    setIndex(-1);
+    await sleep(500);
+    setIndex(0);
+    setTimeout(() => repeat(), CAROUSEL_INTERVAL);
+  }
+
+  useEffect(() => {
+    setTimeout(() => repeat(), CAROUSEL_INTERVAL);
+  }, [])
 
   return (
     <View
@@ -35,17 +52,28 @@ export const Projects: React.FC<ProjectsProps> = props => {
       {!mobile && <img src="/purple_wave_2.svg" width={mobile ? "1000px" : width}
         style={{ position: 'absolute', top: -1, left: 0, zIndex: 1 }}
       />}
-      {index === 0 && <Section
-        as={motion.div}
-        title="InForm"
-        description="InForm is a partner business that aims to digitize communication between private medical  practices and patients. KiloLab has been actively involved in getting this product to market and improving the lives of patients all over South Africa."
-        src="/iphone_12_pro.svg"
-      />}
-      {index === 1 && <Section
-        title="Busy Bees"
-        description="InForm is a partner business that aims to digitize communication between private medical  practices and patients. KiloLab has been actively involved in getting this product to market and improving the lives of patients all over South Africa."
-        src="/busy_bees_ipad.svg"
-      />}
+      <AnimatePresence>
+        {index === 0 && <Section
+          key="inform"
+          as={motion.div}
+          title="InForm"
+          description="InForm is a partner business that aims to digitize communication between private medical  practices and patients. KiloLab has been actively involved in getting this product to market and improving the lives of patients all over South Africa."
+          src="/iphone_12_pro.svg"
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          exit={{opacity: 0}}
+        />}
+        {index === 1 && <Section
+          as={motion.div}
+          key="busy_bees"
+          title="Busy Bees"
+          description="Busy Bees is a young and driven company looking to combine more cost-effective, healthier, high quality and locally sourced Honey with an easy and confortable way to order. KiloLab has been working diligently with this startup to help them kickstart their online sales."
+          src="/busy_bees_ipad.svg"
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          exit={{opacity: 0}}
+        />}
+      </AnimatePresence>
     </View>
   )
 }

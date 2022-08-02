@@ -14,7 +14,6 @@ export const DragMe: React.FC<DragMeProps> = props => {
   const mobile = useIsMobile();
   const width = useWidth();
   const limitRef = useRef<HTMLDivElement>(null);
-  if (mobile) return null;
   return (
     <View
       backgroundColor={theme.colors.background.primary}
@@ -23,7 +22,7 @@ export const DragMe: React.FC<DragMeProps> = props => {
       overflowX="hidden"
       paddingTop="100px"
       display="flex"
-      flexDirection="row"
+      flexDirection={mobile ? "column" : "row"}
       justifyContent="space-evenly"
       alignItems="center"
       {...props}
@@ -44,8 +43,8 @@ export const DragMe: React.FC<DragMeProps> = props => {
           backgroundColor="white"
           drag
           dragConstraints={limitRef}
-          width="400px"
-          height="400px"
+          width={mobile ? "200px" : "400px"}
+          height={mobile ? "200px" : "400px"}
           borderRadius="200px"
           display="flex"
           justifyContent="center"
@@ -88,7 +87,8 @@ export const DragMe: React.FC<DragMeProps> = props => {
           backgroundColor="white"
           color={theme.colors.primary}
           minHeight="40px"
-          width="250px"
+          width="100%"
+          maxWidth="400px"
           whileHover={{scale: 1.1}}
           boxShadow={theme.textShadow}
           fontWeight="bold"

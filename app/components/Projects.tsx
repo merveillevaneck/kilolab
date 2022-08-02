@@ -41,6 +41,7 @@ export const Projects: React.FC<ProjectsProps> = props => {
       height="650px"
       overflowX="hidden"
       paddingTop="200px"
+      paddingBottom={mobile ? "50px" : undefined}
       display="flex"
       flexDirection="row"
       justifyContent="space-evenly"
@@ -49,9 +50,9 @@ export const Projects: React.FC<ProjectsProps> = props => {
       overflowY="hidden"
       {...props}
     >
-      {!mobile && <img src="/purple_wave_2.svg" width={mobile ? "1000px" : width}
+      <img src="/purple_wave_2.svg" width={mobile ? "1000px" : width}
         style={{ position: 'absolute', top: -1, left: 0, zIndex: 1 }}
-      />}
+      />
       <AnimatePresence>
         {index === 0 && <Section
           key="inform"
@@ -59,9 +60,9 @@ export const Projects: React.FC<ProjectsProps> = props => {
           title="InForm"
           description="InForm is a partner business that aims to digitize communication between private medical  practices and patients. KiloLab has been actively involved in getting this product to market and improving the lives of patients all over South Africa."
           src="/iphone_12_pro.svg"
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          exit={{opacity: 0}}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         />}
         {index === 1 && <Section
           as={motion.div}
@@ -69,9 +70,9 @@ export const Projects: React.FC<ProjectsProps> = props => {
           title="Busy Bees"
           description="Busy Bees is a young and driven company looking to combine more cost-effective, healthier, high quality and locally sourced Honey with an easy and confortable way to order. KiloLab has been working diligently with this startup to help them kickstart their online sales."
           src="/busy_bees_ipad.svg"
-          initial={{opacity: 0}}
-          animate={{opacity: 1}}
-          exit={{opacity: 0}}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
         />}
       </AnimatePresence>
     </View>
@@ -101,17 +102,18 @@ export const Section: React.FC<SectionProps> = props => {
       width="100%"
       height="100%"
       display="flex"
+      flexDirection={mobile ? "column" : "row"}
       justifyContent="space-evenly"
       alignItems="center"
       {...props}>
-      <View 
+      <View
         flex={1}
         display="flex"
         flexDirection="row"
         justifyContent="center"
         alignItems="center"
       >
-        <img src={src} width="400px" />
+        <img src={src} width="100%" style={{maxWidth: "600px"}} />
       </View>
       <View
         flex={1}

@@ -109,7 +109,9 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
           opacity={1}
           whileHover={{ scale: 1.1}}
           minHeight="40px"
-          width="200px"
+          width="100%"
+          maxWidth="300px"
+          marginLeft={mobile ? undefined : "25px"}
           onClick={() => navigate('#contact')}
           backgroundColor={theme.colors.primary}
           color="white"
@@ -119,9 +121,9 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
         </Button>
       </View>
 
-      {!mobile && <img src="/purple_wave_1.svg" width={mobile ? "1000px" : width}
+      <img src="/purple_wave_1.svg" width={mobile ? "1000px" : width}
         style={{ position: 'absolute', bottom: 0, left: 0, zIndex: 1 }}
-      />}
+      />
     </View>
   )
 }

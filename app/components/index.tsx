@@ -5,3 +5,7 @@ export * from './Footer';
 export * from './Page';
 export * from './TitleSection';
 export * from './WhatWeDo';
+export * from './WhatWeOffer';
+export * from './DragMe';
+export * from './ContactUs';
+export * from './Projects';

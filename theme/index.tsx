@@ -8,6 +8,7 @@ export const Theme: DefaultTheme = {
   footerHeight: 300,
   bubbleShadow: '0px 0px 1px rgba(0, 0, 0, 0.5)',
   titleShadow: "0px 2px 1px rgba(0, 0, 0, 0.5)",
+  textShadow: "0px 1px 1px rgba(0, 0, 0, 0.3)",
   colors: {
     header: "rgba(0, 0, 0, 0.8)",
     primary: '#6C63FF',
@@ -17,8 +18,12 @@ export const Theme: DefaultTheme = {
     error: 'red',
     blue: '#80A1D4',
     confirmBackground: '#F7F4EA',
-    backgroundDark: 'rgba(20, 7, 47, 0.6)',
-    backgroundLight: 'rgba(142, 227, 200, 0.5)',
+    background: {
+      dark: 'rgba(20, 7, 47, 0.6)',
+      light: 'rgba(142, 227, 200, 0.5)',
+      primary: '#6C63FF',
+      secondary: 'rgba(142, 227, 200, 0.5)',
+    },
     input: 'white',
     inputLabel: 'rgba(255, 255, 255, 0.8)',
     iconLight: 'white',

@@ -9,6 +9,7 @@ declare module 'styled-components' {
     titleSize: number;
     bubbleShadow: string;
     titleShadow: string;
+    textShadow: string;
 
     colors: {
       header: string;
@@ -16,11 +17,15 @@ declare module 'styled-components' {
       secondary: string;
       text: string;
       textLight: string;
-      backgroundLight: string;
+      background: {
+        dark: string,
+        light: string,
+        primary: string,
+        secondary: string,
+      }
       error: string;
       blue: string;
       confirmBackground: string;
-      backgroundDark: string;
       input: string;
       inputLabel: string;
       iconLight: string;

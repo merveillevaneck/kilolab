@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { ChangeEvent, useCallback, useMemo } from 'react'
 import { View, ViewProps } from '@kilo-lab/web-design.compositions';
 import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
@@ -6,6 +6,18 @@ import { Button } from '@kilo-lab/web-design.button';
 import styled, { useTheme } from 'styled-components';
 import { useIsMobile, useWidth } from '~/hooks';
 import { motion } from 'framer-motion';
+import { Formik, FormikHelpers } from 'formik';
+import { z } from 'zod';
+import { toFormikValidationSchema } from 'zod-formik-adapter';
+
+const contactUsSchema = z.object({
+  name: z.string(),
+  email: z.string().email().trim(),
+  contactNumber: z.string(),
+  message: z.string(),
+});
+
+type Values = z.infer<typeof contactUsSchema>
 
 const Input = styled.input`
   &:focus {
@@ -19,7 +31,7 @@ const Input = styled.input`
   border-style: unset;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   padding-left: 20px;
-  background-color: ${ p => p.theme.colors.secondary };
+  background-color: white; 
   color: ${ p => p.theme.colors.text };
   font-weight: bold;
   font-family: ubuntu;
@@ -32,6 +44,8 @@ const TextArea = styled.textarea`
     outline: none;
     box-shadow: 0px 0px 7px rgba(0, 0, 0, 0.5);
   }
+  width: 240px;
+  max-width: 240px;
   height: 100px;
   border-radius: 15px;
   border-color: unset;
@@ -39,11 +53,12 @@ const TextArea = styled.textarea`
   border-style: unset;
   box-shadow: 0px 0px 3px rgba(0, 0, 0, 0.5);
   padding-left: 20px;
-  background-color: ${ p => p.theme.colors.secondary };
+  background-color: white;
   color: ${ p => p.theme.colors.text };
   font-weight: bold;
   font-family: ubuntu;
   margin-top: 10px;
+  padding-top: 10px;
 `;
 
 
@@ -53,6 +68,29 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
   const theme = useTheme();
   const mobile = useIsMobile();
   const width = useWidth();
+
+  const onSubmit = useCallback(async (values: Values, actions: FormikHelpers<Values>) => {
+    actions.setSubmitting(true);
+    try {
+      //do something
+    } catch (e) {
+      console.log(e);
+    } finally {
+      actions.setSubmitting(false);
+    }
+  }, []);
+
+  const initialValues = useMemo(() => ({
+    name: '',
+    email: '',
+    contactNumber: '',
+    message: '',
+  }), []);
+
+  const handleChange = useCallback((name: string, setFieldValue: any, ) => (e: ChangeEvent<HTMLInputElement>) => {
+    setFieldValue(name, e.target.value);
+  }, [])
+
   return (
     <View
       position="relative"
@@ -66,7 +104,6 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
       justifyContent="space-evenly"
       alignItems="center"
       zIndex={2}
-      overflowY="hidden"
       {...props}
     >
       <img src="/green_wave_2.svg" width={mobile ? "1000px" : width}
@@ -99,33 +136,44 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
           alignItems="center"
           boxShadow={theme.titleShadow}
         >
-          <View
-            as={motion.div}
-            animate={{
-              rotate: [0, -180, -360],
-              scale: [1, 0.9, 1],
-            }}
-            transition={{
-              duration: 5,
-              repeat: Infinity,
-              ease: "linear",
-            }}
-            width="300px"
-            display="flex"
-            flexDirection="column"
-            justifyContent="center"
-            alignItems="center"
+          <Formik
+            onSubmit={onSubmit}
+            validationSchema={toFormikValidationSchema(contactUsSchema)}
+            initialValues={initialValues}
+            validateOnBlur
+            enableReinitialize
           >
-            <Input value="Name" />
-            <Input value="Email" />
-            <Input value="Contact Number" />
-            <TextArea
-              value="Message"
-              type="text"
-              cols="40" 
-              rows="5" 
-             />
-          </View>
+            {({values, handleSubmit, setFieldValue}) => (
+              <View
+                as={motion.div}
+                animate={{
+                  rotate: [0, -180, -360],
+                  scale: [1, 0.9, 1],
+                }}
+                transition={{
+                  duration: 5,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                width="300px"
+                display="flex"
+                flexDirection="column"
+                justifyContent="center"
+                alignItems="center"
+              >
+                <Input placeholder="Name" value={values.name} onChange={handleChange('name', setFieldValue)} />
+                <Input placeholder="Email" value={values.email} onChange={handleChange('email', setFieldValue)} />
+                <Input placeholder="Contact Number" value={values.contactNumber} onChange={handleChange('contactNumber', setFieldValue)} />
+                <TextArea
+                  placeholder="Message"
+                  value={values.message}
+                  onChange={(e: ChangeEvent<HTMLTextAreaElement>) => setFieldValue('message', e.target.value)}
+                />
+                 <Button onClick={() => handleSubmit()} />
+              </View>
+            )}
+
+          </Formik>
         </View>
       </View>
       <View

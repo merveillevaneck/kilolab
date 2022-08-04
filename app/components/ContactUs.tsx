@@ -150,7 +150,7 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
       backgroundColor={theme.colors.background.dark}
       position="relative"
       height="650px"
-      overflowY="visible"
+      overflowY="hidden"
       overflowX="hidden"
       paddingTop="300px"
       paddingBottom="200px"

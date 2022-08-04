@@ -77,7 +77,6 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
       </View>
       <View
         flex={1}
-        width="100px"
         display={mobile ? "none" : "flex"}
         flexDirection="row"
         justifyContent="flex-end"
@@ -90,13 +89,12 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
           animate={{ x: 0, y: -10 }}
           transition={{ ease: "easeOut", duration: 1 }}
           src="/kilolab_logo.svg"
-          width="550px"
+          width="600px"
           style={{ position: 'absolute', left: 300 }}
         />
       </View>
       <View
-        display={!mobile ? "none" : undefined}
-        display="flex"
+        display={!mobile ? "none" : "flex"}
         justifyContent="center"
         alignItems="center"
         width="100%"

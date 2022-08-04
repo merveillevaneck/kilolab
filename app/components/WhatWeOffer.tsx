@@ -32,10 +32,9 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
     }
   }, [inView]);
 
-  
   return (
     <View
-      backgroundColor="white"
+      backgroundColor={theme.colors.background.dark}
       position="relative"
       overflowX="hidden"
       paddingTop="200px"
@@ -49,8 +48,8 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
       zIndex={1}
       {...props}
     >
-      <img src="/green_wave.svg" width={mobile ? "1000px" : width}
-        style={{ position: 'absolute', top: 0, left: 0, zIndex: 10 }}
+      <img src="/wave_purple_shadow_1.svg" width={mobile ? "1000px" : width + 20}
+        style={{ position: 'absolute', top: 0, left: 0, zIndex: 10, marginLeft: -5 }}
       />
       <AboutRow
         title="Software Design"
@@ -62,9 +61,9 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
           'Research',
           'Software Prototypes',
         ]}
-        src="/inform_iphone.svg"
+        src="/design.svg"
         number={1}
-        _img={{width: '200px', style: { marginLeft: "20px" }}}
+        _img={{width: mobile ? "100%" : "400px"}}
         current={current}
       />
       <AboutRow
@@ -76,11 +75,11 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
           'Reusable UI Component libraries',
           'Continuous Integration and Cloud Hosting',
         ]}
-        src="/busy_bees_macbook.svg"
+        src="/web.svg"
         reverse
         number={2}
         current={current}
-        _img={{width: '300px', style: { marginLeft: "20px"}}}
+        _img={{width: mobile ? "100%" : "300px"}}
       />
       <AboutRow
         title="Mobile Development"
@@ -90,10 +89,10 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
           'App Store Hosting',
           'Reusable Native Component Libraries',
         ]}
-        src="/inform_standing_iphone.svg"
+        src="/mobile.svg"
         number={3}
         current={current}
-        _img={{width: '250px', style: { marginLeft: mobile ? "80px" : undefined }}}
+        _img={{width: mobile ? "100%" : "300px"}}
         ref={ref}
         marginBottom="10px"
       />
@@ -111,11 +110,12 @@ export const WhatWeOffer: React.FC<WhatWeOfferProps> = props => {
           minHeight="40px"
           width="100%"
           maxWidth="300px"
-          marginLeft={mobile ? undefined : "25px"}
           onClick={() => navigate('#contact')}
           backgroundColor={theme.colors.primary}
           color="white"
           fontWeight="bold"
+          boxShadow="none"
+          marginLeft={mobile ? undefined : "30px"}
         >
           Get A Quote!
         </Button>
@@ -165,8 +165,8 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
       <View
         as={motion.div}
         display="flex"
-        flexDirection={mobile ? "column" : reverse ? "row-reverse" : "row"}
-        justifyContent="space-between"
+        flexDirection={mobile ? "column-reverse" : reverse ? "row-reverse" : "row"}
+        justifyContent="space-evenly"
         alignItems="center"
         width="100%"
         maxWidth="800px"
@@ -181,29 +181,29 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
           marginLeft={!mobile ? reverse ? "100px" : undefined : undefined}>
           <Title
             color={theme.colors.primary}
-            fontFamily="Ubuntu"
             fontSize={mobile ? "24px" : "30px"}
             fontWeight="normal"
             textShadow={theme.textShadow}
             marginLeft="10px"
+            marginBottom="10px"
           >
             {title}
           </Title>
           <Text
-            fontFamily="Ubuntu"
             as={motion.ul}
             color={theme.colors.text}
             textShadow={theme.textShadow}
-            lineHeight="1.5"
-            marginLeft={mobile ? "-20px" : undefined}
+            lineHeight="2"
+            marginLeft={"-20px"}
             fontSize={mobile ? "14px" : undefined}
+            color="white"
           >
             {
-              list.map((item: string) => <li key={item}>{item}</li>)
+              list.map((item: string) => <li marginY="5px" key={item}>{item}</li>)
             }
           </Text>
         </View>
-        <View width="300px">
+        <View width={mobile ? "100%" : "300px"}>
           <img src={src} width="200px" style={{aspectRatio: "auto"}} {..._img} />
         </View>
         { current === number && <View
@@ -233,7 +233,7 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
               transition={{ease: "linear", duration: 5, repeat: Infinity}}
               color="white"
               fontSize="32px"
-              fontFamily="Ubuntu"
+               
               fontWeight="bold">
               {number}
             </Text>

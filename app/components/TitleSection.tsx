@@ -8,7 +8,7 @@ import { useTheme } from 'styled-components';
 import { useWidth, useIsMobile } from '~/hooks';
 import { motion } from 'framer-motion';
 
-export interface TitleSectionProps extends Partial<ViewProps> { }
+export interface TitleSectionProps extends Partial<ViewProps> {}
 
 export const TitleSection: React.FC<TitleSectionProps> = props => {
   const theme = useTheme();
@@ -17,12 +17,12 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
   const mobile = useIsMobile();
   return (
     <View
-      backgroundColor={theme.colors.primary}
+      backgroundColor={theme.colors.background.dark}
       position="relative"
       width="100%"
       height="100vh"
       display="flex"
-      flexDirection="row"
+      flexDirection={mobile ? "column-reverse" : "row"}
       alignItems="stretch"
       color="white"
       {...props}
@@ -33,39 +33,43 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
         flexDirection="column"
         justifyContent="center"
         alignItems="flex-start"
-        marginLeft={mobile ? "20px" : "100px"}
+        marginLeft={mobile ? 0 : "100px"}
         paddingBottom="170px"
         minWidth={mobile ? undefined : "400px"}
       >
         <Title
-          fontFamily="Ubuntu"
           fontSize={mobile ? "40px" : "90px"}
           fontWeight="normal"
           textShadow={theme.titleShadow}
           marginBottom={0}
           paddingBottom={0}
+          textAlign={mobile ? "center" : "left"}
+          width={mobile ? "100%" : undefined}
         >
           The Reuseable Software Powerhouse
         </Title>
         <Text
           fontSize={mobile ? "18px" : "34px"}
           textShadow={theme.titleShadow}
-          fontFamily="Ubuntu"
           marginBottom="10px"
+          textAlign={mobile ? "center" : "left"}
+          width={mobile ? "100%" : undefined}
         >
           Making Massive Ideas Achievable
         </Text>
         <Button
+          opacity={1}
           backgroundColor="white"
-          color={theme.colors.primary}
+          color={theme.colors.text}
           fontWeight="bold"
-          fontFamily="Ubuntu"
+          fontSize="18px"
           boxShadow="1px 0px 5px rgba(0, 0, 0, 0.5)"
           as={motion.button}
           whileHover={{ scale: 1.1 }}
           onClick={() => navigate('/#contact')}
           minHeight="50px"
           width="90%"
+          alignSelf={mobile ? "center" : undefined}
           marginTop="40px"
         >
           Kickstart your Idea!
@@ -74,7 +78,7 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
       <View
         flex={1}
         width="100px"
-        display={mobile ? "hidden" : "flex"}
+        display={mobile ? "none" : "flex"}
         flexDirection="row"
         justifyContent="flex-end"
         alignItems="center"
@@ -82,13 +86,23 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
         overflowX="hidden"
       >
         <motion.img
-          initial={{ x: 500 }}
-          animate={{ x: 0, y: 50 }}
+          initial={{ x: 500, y: -100 }}
+          animate={{ x: 0, y: -10 }}
           transition={{ ease: "easeOut", duration: 1 }}
-          src="/inform_title.svg"
-          width="100%"
+          src="/kilolab_logo.svg"
+          width="550px"
           style={{ position: 'absolute', left: 300 }}
         />
+      </View>
+      <View
+        display={!mobile ? "none" : undefined}
+        display="flex"
+        justifyContent="center"
+        alignItems="center"
+        width="100%"
+        marginTop="100px"
+      >
+        <img src="/kilolab_logo.svg" width="200px" />
       </View>
     </View>
   )

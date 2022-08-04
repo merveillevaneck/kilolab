@@ -4,6 +4,10 @@ import { renderToString } from "react-dom/server";
 
 import { ServerStyleSheet } from 'styled-components';
 
+import { init } from '@emailjs/browser';
+
+init(process.env.NEXT_PUBLIC_USER_ID ?? '');
+
 export default function handleRequest(
   request: Request,
   responseStatusCode: number,

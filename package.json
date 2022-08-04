@@ -8,6 +8,7 @@
     "typecheck": "typescript -b"
   },
   "dependencies": {
+    "@emailjs/browser": "^3.6.2",
     "@kilo-lab/web-design.button": "^0.0.3",
     "@kilo-lab/web-design.compositions": "^0.0.1",
     "@kilo-lab/web-design.header": "^0.0.4",
@@ -26,6 +27,7 @@
     "framer-motion": "^6.5.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "react-icons": "^4.4.0",
     "styled-components": "^5.3.5",
     "zod": "^3.17.10",
     "zod-formik-adapter": "^1.1.1"

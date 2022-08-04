@@ -51,7 +51,7 @@ export const DragMe: React.FC<DragMeProps> = props => {
           alignItems="center"
           boxShadow={theme.titleShadow}
         >
-          <Text textShadow={theme.textShadow} color={theme.colors.primary} fontFamily="Ubuntu" fontSize="24px">Drag Me!</Text>
+          <Text textShadow={theme.textShadow} color={theme.colors.primary}   fontSize="24px">Drag Me!</Text>
         </View>
       </View>
       <View
@@ -60,7 +60,7 @@ export const DragMe: React.FC<DragMeProps> = props => {
         marginLeft={mobile ? undefined : "20px"}
       >
         <Title
-          fontFamily="Ubuntu"
+           
           color="white"
           textShadow={theme.textShadow}
           fontSize={mobile ? "34px" : "45px"}
@@ -72,7 +72,6 @@ export const DragMe: React.FC<DragMeProps> = props => {
           Interactive UX
         </Title>
         <Text
-          fontFamily="Ubuntu"
           fontSize={mobile ? "18px" : "24px"}
           color="white"
           maxWidth="650px"
@@ -80,7 +79,7 @@ export const DragMe: React.FC<DragMeProps> = props => {
           textAlign={mobile ? "center" : "left"}
           textShadow={theme.textShadow}
           lineHeight="1.5">
-            Create modern and interactive features for your users that make you stand out from your competition. Wanna see? Drag the bubble on the left.
+            Create modern and interactive features for your users that make you stand out from your competition. Wanna see? Drag the bubble {mobile ? "above" : "on the left"}.
         </Text>
         <Button
           as={motion.button}

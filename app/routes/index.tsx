@@ -27,7 +27,7 @@ const List = styled.ul<FontSizeProps>`
 
 const LI = styled.li`
   color: white;
-  font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  font-family: --apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Roboto, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 `;
 
 const Item = styled(LI)<FontSizeProps>(

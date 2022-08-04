@@ -17,7 +17,10 @@ export const Header: FC<ViewProps> = props => {
 
   return (
     <HeaderContainer
-      backgroundColor={theme.colors.header}
+      position="fixed"
+      top={0}
+      zIndex={11}
+      backgroundColor={theme.colors.background.dark}
       boxShadow="0px 1px 5px rgba(0, 0, 0, 0.5)"
       height={theme.headerHeight}
       width="100%"
@@ -28,7 +31,7 @@ export const Header: FC<ViewProps> = props => {
     >
       <>
         <Title fontWeight="normal" display="flex" flexDirection="row" alignItems="center" color="white">
-          <img style={{marginRight: '-5px'}} src="https://kilolab-next-template.netlify.app/logo.svg" width={theme.headerHeight} height={theme.headerHeight} alt="kilolab logo" />
+          <img style={{marginRight: '-20px'}} src="https://kilolab-next-template.netlify.app/logo.svg" width={theme.headerHeight} height={theme.headerHeight} alt="kilolab logo" />
           iloLab
         </Title>
       {children}

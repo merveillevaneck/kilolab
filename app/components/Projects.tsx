@@ -121,7 +121,7 @@ export const Section: React.FC<SectionProps> = props => {
         marginLeft={mobile ? undefined : "20px"}
       >
         <Title
-          fontFamily="Ubuntu"
+           
           color={theme.colors.primary}
           textShadow={theme.textShadow}
           fontSize={mobile ? "34px" : "45px"}
@@ -133,7 +133,7 @@ export const Section: React.FC<SectionProps> = props => {
           {title}
         </Title>
         <Text
-          fontFamily="Ubuntu"
+           
           fontSize={mobile ? "18px" : "24px"}
           color={theme.colors.text}
           maxWidth="650px"

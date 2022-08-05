@@ -1,4 +1,5 @@
 import React, { useRef } from 'react'
+import { useNavigate } from '@remix-run/react';
 import { View, ViewProps } from '@kilo-lab/web-design.compositions';
 import { Title } from '@kilo-lab/web-design.title';
 import { Text } from '@kilo-lab/web-design.text';
@@ -14,6 +15,7 @@ export const DragMe: React.FC<DragMeProps> = props => {
   const mobile = useIsMobile();
   const width = useWidth();
   const limitRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
   return (
     <View
       backgroundColor={theme.colors.background.primary}
@@ -91,6 +93,7 @@ export const DragMe: React.FC<DragMeProps> = props => {
           whileHover={{scale: 1.1}}
           boxShadow={theme.textShadow}
           fontWeight="bold"
+          onClick={() => navigate("#contact")}
         >
           I Want One Too!
         </Button>

@@ -20,11 +20,11 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
       backgroundColor={theme.colors.background.dark}
       position="relative"
       width="100%"
-      height="100vh"
       display="flex"
       flexDirection={mobile ? "column-reverse" : "row"}
       alignItems="stretch"
       color="white"
+      paddingTop={mobile ? "100px" : undefined}
       {...props}
     >
       <View
@@ -79,18 +79,19 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
         flex={1}
         display={mobile ? "none" : "flex"}
         flexDirection="row"
-        justifyContent="flex-end"
-        alignItems="center"
+        justifyContent="flex-start"
+        alignItems="flex-start"
         position="relative"
         overflowX="hidden"
+        marginTop="100px"
       >
         <motion.img
-          initial={{ x: 500, y: -100 }}
+          initial={{ x: 500, y: -200 }}
           animate={{ x: 0, y: -10 }}
           transition={{ ease: "easeOut", duration: 1 }}
           src="/kilolab_logo.svg"
-          width="600px"
-          style={{ position: 'absolute', left: 300 }}
+          width={width / 3}
+          style={{ position: 'absolute', left: 150, top: 50 }}
         />
       </View>
       <View
@@ -98,7 +99,6 @@ export const TitleSection: React.FC<TitleSectionProps> = props => {
         justifyContent="center"
         alignItems="center"
         width="100%"
-        marginTop="100px"
       >
         <img src="/kilolab_logo.svg" width="200px" />
       </View>

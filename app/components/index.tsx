@@ -9,3 +9,4 @@ export * from './WhatWeOffer';
 export * from './DragMe';
 export * from './ContactUs';
 export * from './Projects';
+export * from './category';

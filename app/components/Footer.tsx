@@ -30,11 +30,11 @@ export const Footer: React.FC<FooterProps> = props => {
   return (
     <FooterContainer
       display="flex"
-      flexDirection="row"
+      flexDirection={mobile ? "column" : "row"}
       justifyContent="space-around"
-      height="300px"
+      minHeight="300px"
       alignItems="center"
-      backgroundColor={theme.colors.primary}
+      backgroundColor={theme.colors.background.dark}
       {...rest}
     >
       <TitleGraphic
@@ -45,21 +45,21 @@ export const Footer: React.FC<FooterProps> = props => {
         justifyContent="flex-start"
         alignItems="center"
         image={
-          <img src="https://kilolab-next-template.netlify.app/earth_spin.svg" width="200px" height="200px" />
+          <img src="/kilolab_logo.svg" width="200px" height="200px" />
         }
         title={
-          <Title  color="white" fontSize="30px" marginLeft="-50px" marginBottom="55px">
+          <Title  color="white" fontSize="30px" marginLeft="-40px" marginBottom="20px">
             KiloLab
             <br />
             Pty Ltd
           </Title>
         }
       />
-      <View height="150px" style={{color: 'white'}}>
-        <Title color={theme.colors.header}>
+      <View height="150px" style={{color: theme.colors.textLight}}>
+        <Title textAlign={mobile ? "center" : "left"}>
           Location
         </Title>
-        <Text style={{fontSize:"14px"}}>
+        <Text textAlign={mobile ? "center" : "left"} style={{fontSize:"14px"}}>
           51 Mount Du Roche Crescent<br />
           Somerset Ridge<br />
           Somerset West<br />
@@ -67,11 +67,11 @@ export const Footer: React.FC<FooterProps> = props => {
           7130<br />
         </Text>
       </View>
-      <View height="150px" style={{color: 'white'}}>
-        <Title color={theme.colors.header}>
+      <View height="150px" style={{color: theme.colors.textLight}}>
+        <Title textAlign={mobile ? "center" : "left"}>
           Contact Us
         </Title>
-        <Text>
+        <Text textAlign={mobile ? "center" : "left"}>
           info@kilolab.co.za
           <br />
           +27 84 254 8270

@@ -11,6 +11,7 @@ import { z } from 'zod';
 import { toFormikValidationSchema } from 'zod-formik-adapter';
 import { init, send } from '@emailjs/browser';
 import { AiOutlineLoading3Quarters } from 'react-icons/ai'
+import { useCategory, CategoryButton } from '~/components';
 
 const contactUsSchema = z.object({
   name: z.string(),
@@ -37,6 +38,9 @@ const Input = styled.input`
   color: ${ p => p.theme.colors.textLight };
   font-weight: bold;
   margin-top: 10px;
+  ::placeholder {
+    color: white;
+  }
 `;
 
 const TextArea = styled.textarea`
@@ -58,11 +62,15 @@ const TextArea = styled.textarea`
   font-weight: bold;
   margin-top: 10px;
   padding-top: 10px;
+
+  ::placeholder {
+    color: white;
+  }
 `;
 
 const categories = [
   'Consultation',
-  'WebDevelopment',
+  'Web Development',
   'Mobile Development',
 ];
 
@@ -73,6 +81,8 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
   const mobile = useIsMobile();
   const width = useWidth();
   const [sent, setSent] = useState(false);
+
+  const [selected, onChange] = useCategory(categories);
   
   const [category, setCategory] = useState(categories[0]);
 
@@ -80,7 +90,6 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
     actions.setSubmitting(true);
     try {
       //do something
-      console.log(values);
       const result = await send(
         window.ENV.NEXT_PUBLIC_SERVICE_ID || '',
         window.ENV.NEXT_PUBLIC_TEMPLATE_ID || '',
@@ -94,7 +103,6 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
         window.ENV.NEXT_PUBLIC_USER_ID || '',
       );
       if (result.status === 200) {
-        console.log('something')
         setSent(true);
       }
     } catch (e) {
@@ -105,16 +113,15 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
   }, [setSent, category]);
 
   const initialValues = useMemo(() => ({
-    name: 'merv',
-    email: 'merv@gmail.com',
-    message: 'merv',
+    name: '',
+    email: '',
+    message: '',
   }), []);
 
   const handleChange = useCallback((name: string, setFieldValue: any, ) => (e: ChangeEvent<HTMLInputElement>) => {
     setFieldValue(name, e.target.value);
   }, [])
 
-  console.log(sent)
 
   if (sent) {
     return (<View
@@ -216,8 +223,17 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
                 justifyContent="center"
                 alignItems="center"
               >
-                <Input placeholder="Name" value={values.name} onChange={handleChange('name', setFieldValue)} />
-                <Input placeholder="Email" value={values.email} onChange={handleChange('email', setFieldValue)} />
+                <Input
+                  placeholder="Name"
+                  placeholderTextColor="white"
+                  value={values.name}
+                  onChange={handleChange('name', setFieldValue)}
+                />
+                <Input
+                  placeholder="Email"
+                  value={values.email}
+                  onChange={handleChange('email', setFieldValue)}
+                />
                 <Text margin="0" padding="0" fontSize="12px" color="white">{errors.email ?? ''}</Text>
                 <TextArea
                   placeholder="Message"
@@ -270,23 +286,9 @@ export const ContactUs: React.FC<ContactUsProps> = props => {
           width="100%"
           marginBottom={mobile ? "100px" : undefined}
         >
-          <View
-            as={motion.div}
-            backgroundColor="white"
-            whileHover={{scale: 1.05}}
-            style={{cursor: "pointer"}}
-            display="flex"
-            justifyContent="center"
-            alignItems="center"
-            borderColor={theme.colors.primary}
-            borderWidth="3px"
-            borderRadius="15px"
-            boxShadow="1px 2px 5px rgba(0, 0, 0, 0.5)"
-            paddingX="10px"
-            margin="10px"
-          >
-            <Text   color={theme.colors.primary} fontWeight="bold">Consultation</Text>
-          </View>
+          <CategoryButton selected={selected[categories[0]]} value={categories[0]} onChange={onChange} />
+          <CategoryButton selected={selected[categories[1]]} value={categories[1]} onChange={onChange} />
+          <CategoryButton selected={selected[categories[2]]} value={categories[2]} onChange={onChange} />
         </View>
       </View>
     </View>

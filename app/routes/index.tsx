@@ -13,6 +13,7 @@ import {
   Projects,
   ContactUs,
   TitleGraphic,
+  Footer,
   Page,
 } from '../components';
 import { useIsMobile } from '../hooks';
@@ -54,7 +55,7 @@ export default function Index() {
       <DragMe />
       <Projects />
       <ContactUs />
-      <View height="300px" width="100%"/>
+      <Footer />
     </View>
   );
 }

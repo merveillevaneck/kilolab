@@ -191,15 +191,14 @@ export const AboutRow: React.FC<AboutRowProps> = React.forwardRef((props, ref) =
           </Title>
           <Text
             as={motion.ul}
-            color={theme.colors.text}
+            color={theme.colors.textLight}
             textShadow={theme.textShadow}
             lineHeight="2"
             marginLeft={"-20px"}
             fontSize={mobile ? "14px" : undefined}
-            color="white"
           >
             {
-              list.map((item: string) => <li marginY="5px" key={item}>{item}</li>)
+              list.map((item: string) => <li key={item}>{item}</li>)
             }
           </Text>
         </View>

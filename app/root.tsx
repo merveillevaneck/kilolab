@@ -28,8 +28,14 @@ const Styles = createGlobalStyle`
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "New Remix App",
+  title: "KiloLab - The Reusable Software Powerhouse",
+  descrition: "Make beautiful and custom Web and Mobile Applications, Web designs and more with reusable software.",
   viewport: "width=device-width,initial-scale=1",
+  "og:image": "https://www.kilolab.co.za/kilolab_logo.svg",
+  "og:type": "website",
+  "og:url": "https://www.kilolab.co.za",
+  "og:title": "KiloLab - The Reusable Software Powerhouse",
+  "og:description": "Make beautiful and custom Web and Mobile Applications, design and more with reusable software.",
 });
 
 export const loader = async () => {

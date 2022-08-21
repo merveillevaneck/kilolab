@@ -55,10 +55,10 @@ export default function App() {
       <head>
         <Meta />
         <Links />
+        <script defer data-domain="kilolab.co.za" src="https://plausible.io/js/plausible.js"></script>
         {typeof document === "undefined"
           ? "__STYLES__"
           : null}
-        <script defer data-domain="kilolab.co.za" src="https://plausible.io/js/plausible.js"></script>
       </head>
       <body>
         <ThemeProvider theme={Theme}>
